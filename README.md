@@ -14,7 +14,10 @@ This application allows users to:
 
 &nbsp;&nbsp;&nbsp;&nbsp; Create custom Shinobi with unique clans and jutsus
 
+-------------------------------------------------------------------------
 👥 User Roles
+<br>
+<br>
 👁️ Public Viewer
 -------------------------------------------------------------------------
 &nbsp;&nbsp;&nbsp;&nbsp; Can view all Shinobi, jutsu, and clan information
