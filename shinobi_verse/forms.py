@@ -1,6 +1,5 @@
 from django import forms
 from django.contrib.auth import get_user_model
-
 from Shinobi_Network.shinobi_verse.models import Shinobi, Clan, Jutsu, Comment
 
 UserModel = get_user_model()
@@ -61,3 +60,7 @@ class LoginForm(forms.Form):
 
 class SearchForm(forms.Form):
     query = forms.CharField(placeholder="Search", max_length=100, required=False)
+
+
+
+
