@@ -1,8 +1,8 @@
-from Shinobi_Network.shinobi_verse import views
+from shinobi_verse import views
 from django.urls import path
 
 urlpatterns = [
-    path('home/', views.home_view, name='home'),
+    path('', views.home_view, name='home'),
     path('profile/', views.profile_view, name='profile'),
 
     path('login/', views.login_view, name='login'),

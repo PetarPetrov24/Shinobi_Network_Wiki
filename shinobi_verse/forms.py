@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth import get_user_model
-from Shinobi_Network.shinobi_verse.models import Shinobi, Clan, Jutsu, Comment
+from shinobi_verse.models import Shinobi, Clan, Jutsu, Comment
 
 UserModel = get_user_model()
 
@@ -30,9 +30,9 @@ class CommentForm(forms.ModelForm):
 
 
 class RegisterForm(forms.ModelForm):
-    password1 = forms.CharField(placeholder="Password", widget=forms.PasswordInput)
-    password2 = forms.CharField(placeholder='Password confirm', widget=forms.PasswordInput)
-    email = forms.EmailField(max_length=50, required=True)
+    password1 = forms.CharField(label="Password", widget=forms.PasswordInput)
+    password2 = forms.CharField(label='Password confirm', widget=forms.PasswordInput)
+    email = forms.EmailField(max_length=50, required=True, widget=forms.EmailInput(attrs={'required': True}))
 
     class Meta:
         model = UserModel
@@ -59,7 +59,7 @@ class LoginForm(forms.Form):
 
 
 class SearchForm(forms.Form):
-    query = forms.CharField(placeholder="Search", max_length=100, required=False)
+    query = forms.CharField(label="Search", max_length=100, required=False)
 
 
 

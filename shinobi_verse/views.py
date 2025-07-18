@@ -6,8 +6,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from Shinobi_Network.shinobi_verse.forms import RegisterForm, LoginForm, ShinobiForm, CommentForm, ClanForm, JutsuForm
-from Shinobi_Network.shinobi_verse.models import Shinobi, Like, Clan, Jutsu
+from shinobi_verse.forms import RegisterForm, LoginForm, ShinobiForm, CommentForm, ClanForm, JutsuForm
+from shinobi_verse.models import Shinobi, Like, Clan, Jutsu
 
 
 # Create your views here.
