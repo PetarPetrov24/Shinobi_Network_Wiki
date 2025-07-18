@@ -26,7 +26,7 @@ This application allows users to:
 
 🙋‍♂️ Registered User
 -------------------------------------------------------------------------
-&nbsp;&nbsp;&nbsp;&nbsp; Can create, edit, and delete their own Shinobi
+&nbsp;&nbsp;&nbsp;&nbsp; Can create, edit, delete and view their own Shinobi
 
 &nbsp;&nbsp;&nbsp;&nbsp; Can like and comment on other Shinobi profiles
 
@@ -36,7 +36,7 @@ This application allows users to:
 
 &nbsp;&nbsp;&nbsp;&nbsp; Can like and comment on any content
 
-&nbsp;&nbsp;&nbsp;&nbsp; Cannot delete other users' Shinobi
+&nbsp;&nbsp;&nbsp;&nbsp; Full permissions
 
 
 
