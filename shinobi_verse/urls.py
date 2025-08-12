@@ -1,5 +1,7 @@
 from shinobi_verse import views
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.home_view, name='home'),
@@ -7,6 +9,8 @@ urlpatterns = [
 
     path('login/', views.login_view, name='login'),
     path('register/', views.register_view, name='register'),
+    path('logout/', views.logout_view, name='logout'),
+    path('about/', views.about_view, name='about'),
 
     path('shinobi/', views.ShinobiListView.as_view(), name='shinobi_list'),
     path('shinobi/<int:pk>/', views.ShinobiDetailView.as_view(), name='shinobi_detail'),
@@ -20,7 +24,7 @@ urlpatterns = [
     path('clans/<int:pk>/edit/', views.ClanUpdateView.as_view(), name='clan_update'),
     path('clans/<int:pk>/delete/', views.ClanDeleteView.as_view(), name='clan_delete'),
 
-    path('jutsus/', views.JutsuListView.as_view(), name='jutsu-list'),
+    path('jutsus/', views.JutsuListView.as_view(), name='jutsu_list'),
     path('jutsus/<int:pk>/', views.JutsuDetailView.as_view(), name='jutsu_detail'),
     path('jutsus/create/', views.JutsuCreateView.as_view(), name='jutsu_create'),
     path('jutsus/<int:pk>/edit/', views.JutsuUpdateView.as_view(), name='jutsu_update'),
@@ -29,3 +33,6 @@ urlpatterns = [
     path('like/<str:model_name>/<int:object_id>/', views.like_view, name='like'),
     path('comment/<str:model_name>/<int:object_id>/', views.comment_view, name='comment'),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

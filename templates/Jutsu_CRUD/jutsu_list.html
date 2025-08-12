@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'css/jutsus/jutsu_list.css'%}">
+{% endblock %}
+
+{% block content %}
+    <h2>Jutsu Archives</h2>
+    {% if jutsu_list|length == 0 %}
+        <p>For now, there is no shinobi created.</p>
+    {% else %}
+        <div class="all-jutsu">
+            <ul>
+                {% for jutsu in jutsu_list %}
+                    <li>
+                        <a href="{% url 'jutsu_detail' jutsu.pk %}" class="jutsu-details">{{jutsu.name}} - Details</a>
+                  
+                        {% if user.is_authenticated and  user == jutsu.created_by %}
+                            <a href="{% url 'jutsu_update' jutsu.pk %}" class="jutsu-btn-edit">Edit</a>
+                            <a href="{% url 'jutsu_delete' jutsu.pk %}" class="jutsu-btn-delete">Delete</a>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+{% endblock %}

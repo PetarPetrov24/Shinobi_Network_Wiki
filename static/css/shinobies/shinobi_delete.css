@@ -1,0 +1,31 @@
+.both-btns {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 10em;
+}
+
+.btn-delete-shinobi {
+    color: white;
+    background-color: #23252b;
+}
+
+.btn-cancel-shinobi {
+    text-decoration: none;
+    color: white;
+    width: 100px;
+    text-align: center;
+    border: 1px solid gray;
+    border-radius: 0.5em;
+    background-color: #23252b;
+    padding: 0.1em;
+}
+
+.btn-delete-shinobi:hover {
+    color: red;
+}
+
+.btn-cancel-shinobi:hover {
+    color: green;
+}

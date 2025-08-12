@@ -1,0 +1,101 @@
+.main-welcome-message {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.main-welcome-message:hover {
+    color: #e05302;
+}
+
+h2, h3 {
+    text-align: center;
+}
+
+.admin-since > p:first-of-type, .staff-since > p:first-of-type, .authenticated-since > p:first-of-type {
+    padding-left: 2em;
+} 
+
+.admin-since, .staff-since, .authenticated-since {
+    display: flex;
+    padding: 0;
+    gap: 89em;
+}
+
+.admin-since p, .staff-since p, .authenticated-since p {
+    margin: 0;
+}
+
+.welcome-anonymous {
+    position: relative; 
+}
+
+.welcome-anonymous p {
+    margin: 0;
+    position: absolute;
+    left: 107em;
+    bottom: 2em;
+    z-index: 12;
+}
+
+.welcome-admin p,
+.welcome-staff p,
+.welcome-authenticated-user p {
+    margin: 1em 0;
+    padding: 0;
+    text-align: center;
+    font-weight: bold;
+}
+
+.anonymous-permissions p {
+    margin: 0;
+    padding-top: 1em;
+}
+
+p {
+    margin: 2em;
+    padding: 0;
+}
+
+.featured-section-featured-shinobi ul,
+.featured-section-featured-clans ul,
+.featured-section-featured-jutsu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 1000px;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5em;
+}
+
+.featured-section-featured-shinobi li,
+.featured-section-featured-clans li,
+.featured-section-featured-jutsu li {
+    padding: 0.5em;
+    border-bottom: 1px solid #ccc;
+}
+
+.login-register-prompt {
+    display: flex;
+    justify-content: center;
+    margin-top: 2em;
+}
+
+.login-register-prompt p {
+    margin-top: 2em;
+    text-align: center;
+}
+
+.user-welcome p:nth-of-type(1) {
+    text-align: center;
+}
+
+.helpful-text-authenticated_user, .helful-text-staff, .helpful-text-admin {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 10em;
+}
+
+
+

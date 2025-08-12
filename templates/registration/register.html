@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="register-background">
+    <div class="outer-register-scope">
+        <div class="inner-register-scope">
+            <form action="{% url 'register' %}" method="POST">
+                {% csrf_token %}
+                <h2>Register</h2>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="password" name="password1" placeholder="Password" required>
+                <input type="password" name="password2" placeholder="Confirm Password" required>
+                <button type="submit">Register</button>  
+            </form>
+        </div>
+    </div>
+</main>
+{% endblock%}
+

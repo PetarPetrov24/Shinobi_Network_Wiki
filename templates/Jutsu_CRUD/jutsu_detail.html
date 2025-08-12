@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'css/jutsus/jutsu_detail.css'%}">
+{% endblock %}
+
+{% block content %}
+  <p>{{ greeting_message }}</p>
+
+  <h2>{{ object.name }}</h2>
+
+  <div class="jutsu-detail-info">
+    <p><strong>Chakra type:</strong> {{ object.chakra_type }}</p>
+    <p><strong>Jutsu type:</strong> {{ object.jutsu_type }}</p>
+    <p><strong>Description:</strong> {{ object.description }}</p>
+
+    <p>Creator: {{ object.created_by.profile.nickname }}</p>
+  </div>
+
+  <a href="{% url 'jutsu_list' %}" class="jutsu-list-btn">Jutsu List</a>
+  
+{% endblock %}

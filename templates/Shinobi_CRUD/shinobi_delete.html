@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'css/shinobies/shinobi_delete.css'%}">
+{% endblock %}
+
+{% block content %}
+  <h2>Delete Shinobi: {{ object.name }}</h2>
+  
+
+  <form method="POST">
+    {% csrf_token %}
+    <div class="both-btns">
+      <p>Are you sure you want to delete <strong>{{ object.name }}</strong>?</p>
+      <button type="submit" class="btn-shinobi btn-delete-shinobi">Yes, delete</button>
+      <a href="{% url 'shinobi_list' %}" class="btn-shinobi btn-cancel-shinobi">Cancel</a>
+    </div>
+    
+  </form>
+{% endblock %}

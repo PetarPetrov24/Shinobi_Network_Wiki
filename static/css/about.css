@@ -1,0 +1,54 @@
+body {
+    background-color: #e6d8c3
+}
+
+.jutsus, .mission, .working-process, .info, .community, .join, .journey {
+    border-bottom: 1px solid white;
+    padding-bottom: 1em;
+}
+
+.character {
+    border-top: 1px solid white;
+    padding-bottom: 1em;
+    margin-bottom: 2em;     
+}
+
+.greeting, .character {
+    border-bottom: 1px solid white;
+}
+
+header h1 {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    color: #e05302;
+}
+
+section h1, section h2 {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    color: #e05302;
+}
+
+ul {
+    list-style-position: inside;
+    text-align: center;          
+}
+
+li {
+    display: list-item; 
+    margin: 0.5em 0;
+}
+
+p {
+    text-align: center;
+    justify-content: center;
+    margin: 4em;
+    font-size: 16px;
+}
+
+footer {
+    padding-top: 0;
+}
+

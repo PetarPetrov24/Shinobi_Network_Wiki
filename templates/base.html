@@ -1,0 +1,80 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Base Shinobi Network Page</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/box-model/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/box-model/typography.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sign-in/register.css' %}">
+    <link rel="stylesheet" href="{% static 'css/sign-in/login.css'%}">
+    <link rel="stylesheet" href="{% static 'css/about.css' %}">
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/profile.css' %}">
+    <link rel="stylesheet" href="{% static 'css/shinobies/shinobi_list.css' %}">
+
+</head>
+<body>
+    {% block extra_head %}{% endblock %}
+        <div class="wrapper">
+                <div class="inner-nav-scope">
+                    <div class="nav-bar">
+                        <ul>
+                            <li>
+                                <a href="{% url 'home' %}">Home</a>
+                            </li>
+                            {% if user.is_authenticated %}
+                                <li><a href="{% url 'profile' %}">Profile</a></li>
+                                
+                                <li><a href="{% url 'shinobi_list' %}">All Shinobi</a></li>
+                                <li><a href="{% url 'shinobi_create' %}">Add Shinobi</a></li>
+                                
+                                <li><a href="{% url 'clan_list' %}">All Clans</a></li>
+                                <li><a href="{% url 'clan_create' %}">Add Clan</a></li>
+                                
+                                <li><a href="{% url 'jutsu_list' %}">All Jutsu</a></li>
+                                <li><a href="{% url 'jutsu_create' %}">Add Jutsu</a></li>
+                                
+                                <li><a href="{% url 'logout' %}">Logout</a></li>
+
+                                {% if user.profile.avatar %}
+                                    <li class="nav-avatar">
+                                        <a href="{% url 'profile' %}">
+                                            <img src="{{ user.profile.avatar.url }}" alt="Avatar">
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            {% else %}
+                                <li><a href="{% url 'shinobi_list' %}">Shinobi</a></li>
+                                <li><a href="{% url 'clan_list' %}">Clans</a></li>
+                                <li><a href="{% url 'jutsu_list' %}">Jutsu</a></li>
+
+                                <li><a href="{% url 'register' %}">Register</a></li>
+                                <li><a href="{% url 'login' %}">Login</a></li>
+
+                                <li><a href="{% url 'about' %}">About</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+
+            <main>
+                {% block content %}
+                
+                {% endblock %}
+            </main>
+
+            <footer>
+                <div class="footer-inner-box">
+                        <p>&copy; 2025 Shinobi Network. All rights reserved.</p>
+                </div>
+            </footer>
+        </div>
+    {% block extra_scripts %}{% endblock %}
+</body>
+</html>

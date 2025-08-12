@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Shinobi Archives</h2>
+    {% if shinobi_list|length == 0 %}
+        <p>For now, there is no shinobi created.</p>
+    {% else %}
+        <div class="all-shinobies">
+            <ul>
+                {% for shinobi in shinobi_list %}
+                    <li>
+                        {% if shinobi.shinobi_picture %}
+                            <img src="{{shinobi.shinobi_picture.url}}" alt="{{shinobi.name}}">
+                        {% endif %}
+                        
+                        <!-- Likes count -->
+                        <p>Likes: {{ shinobi.likes.count }}</p>
+      
+                        <!-- Comment count -->
+                        <p>Comments: {{ shinobi.comments.count }}</p>
+                     
+                        <a href="{% url 'shinobi_detail' shinobi.pk %}" class="shinobi-details">{{shinobi.name}}</a>
+                  
+                        {% if user.is_authenticated and  user == shinobi.created_by %}
+                             <form action="{% url 'like' 'shinobi' shinobi.pk %}" method="post" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit">
+                                    {% if shinobi.pk in liked_shinobi_ids %}
+                                        Unlike
+                                    {% else %}
+                                        Like
+                                    {% endif %}
+                                </button>
+                                </form>
+                        {% else %}
+                            <p><a href="{% url 'login' %}">Log in</a> to like</p>
+                        {% endif %}
+                            <a href="{% url 'shinobi_update' shinobi.pk %}" class="btn-edit">Edit</a>
+                            <a href="{% url 'shinobi_delete' shinobi.pk %}" class="btn-delete">Delete</a>
+                        <!-- Link to comments section -->
+                        <a href="{% url 'shinobi_detail' shinobi.pk %}#comments">View Comments</a>
+                    </li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+
+{% endblock %}

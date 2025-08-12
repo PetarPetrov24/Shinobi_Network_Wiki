@@ -1,0 +1,74 @@
+.profile-info {
+    padding-top: 3em;
+    
+}
+
+.avatar-picture img {
+    height: 300px;
+    width: 200px;
+    border-radius: 1em;
+}
+
+.avatar-picture   {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 2em;
+
+}
+
+#edit-btn, #update-btn {
+    display: flex;
+    justify-content: center;
+    justify-self: center;
+    margin-top: 4em;
+    padding: 0.5em;
+    width: 200px;
+    border-radius: 0.5em;
+    background-color: #23252b; 
+    color: white;
+}
+
+#edit-btn:hover, #update-btn:hover {
+    color: #e05302;
+}
+
+form {
+    background: #e6d8c3;
+    border: none;
+}
+
+label[for="id_nickname"], label[for="id_bio"], label[for="id_avatar"] {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 1em;
+}
+
+input[name="nickname"] {
+    text-align: center;
+    border-radius: 0.5em;
+}
+
+textarea[name="bio"] {
+    padding-left: 10px;
+    padding-top: 5px;
+    border-radius: 1em;
+}
+
+label[for="id_avatar"] {
+    padding: 0;
+    margin: 0;
+}
+
+input[type="file"] {
+    padding-top: 1em;
+}
+
+.inner-form-scope {
+    border: 1px solid gray;
+    padding: 1em;
+    border-radius: 0.8em;
+    background-color: rgba(35, 37, 43, 0.1); 
+}
+
+

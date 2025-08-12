@@ -1,0 +1,31 @@
+html {
+    font-size: clamp(11px, 3vw, 16px);
+    line-height: 1.4;
+    font-family: Georgia, serif;
+}
+
+body, input, select, textarea, table, button {
+    font: inherit
+}
+
+p {
+    padding-bottom: 1.5em;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    line-height: 1.2;
+    margin-top: 1em;
+    margin-bottom: 0.7em;
+    font-weight: bold;
+}
+
+h1 { font-size: 2.4em; }
+h2 { font-size: 2.0em; }
+h3 { font-size: 1.7em; }
+h4 { font-size: 1.4em; }
+h5 { font-size: 1.2em; }
+h6 { font-size: 1.0em; }
+
+blockquote {
+    padding-left: 2em;
+}

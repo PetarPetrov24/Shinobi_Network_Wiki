@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'css/clans/clan_detail.css'%}">
+{% endblock %}
+
+{% block content %}
+  <p>{{ greeting_message }}</p>
+
+  <h2>{{ object.name }}</h2>
+
+  {% if object.symbol %}
+    <div class="clan-detail-avatar-img">
+      <img src="{{ object.symbol.url }}" alt="{{ object.name }}" style="max-width: 200px; border-radius: 0.5em;">
+    </div>
+  {% endif %}
+
+  <div class="shinobi-detail-info">
+    <p><strong>Village:</strong> {{ object.village }}</p>
+    <p><strong>Founder:</strong> {{ object.founder }}</p>
+    <p><strong>Description:</strong> {{ object.description }}</p>
+    
+    <p>Creator: {{ object.created_by.profile.nickname }}</p>
+  </div>
+
+  <a href="{% url 'clan_list' %}" class="clan-list-btn">Clan List</a>
+  
+{% endblock %}

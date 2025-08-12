@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'css/jutsus/jutsu_delete.css'%}">
+{% endblock %}
+
+{% block content %} 
+    <h2>Delete Jutsu: {{ object.name }}</h2>
+  
+
+  <form method="POST">
+    {% csrf_token %}
+    <div class="both-btns">
+      <p>Are you sure you want to delete <strong>{{ object.name }}</strong>?</p>
+      <button type="submit" class="btn-clan btn-delete-jutsu">Yes, delete</button>
+      <a href="{% url 'jutsu_list' %}" class="btn-clan btn-cancel-jutsu">Cancel</a>
+    </div>
+    
+  </form>
+{% endblock %}

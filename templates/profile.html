@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="profile-info">
+    {% if profile.avatar %}
+        <div class="avatar-picture">
+            <img src="{{ profile.avatar.url }}" alt="Avatar" class="avatar-image">
+        </div>
+        <p><strong>Nickname: </strong>{{ profile.nickname }}</p>
+        <p><strong>Bio: </strong>{{ profile.bio }}</p>
+    {% else %}
+        <p>No avatar uploaded yet.</p>
+    {% endif %}        
+</div>
+
+<button id="edit-btn">Edit Profile</button>
+
+<div class="profile-edit-form">
+    <div class="outer-edit-form-scope">
+        <form method="POST" enctype="multipart/form-data">
+            <div class="inner-form-scope">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" id="update-btn">Update Profile</button>
+            </div>
+        </form>
+    </div>
+    
+</div>
+{% endblock%}
+
+{% block extra_scripts %}
+<script src="{% static 'js/profile.js' %}"></script>
+{% endblock %}

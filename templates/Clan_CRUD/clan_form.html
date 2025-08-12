@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'css/clans/clan_form.css'%}">
+{% endblock %}
+
+{% block content %}
+  <h2>{% if object %}Update{% else %}Create{% endif %} Clan</h2>
+
+  <form method="POST" enctype="multipart/form-data" class="clan-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit" class="create-btn-form">{% if object %}Update{% else %}Create{% endif %}</button>
+  </form>
+
+  <a href="{% url 'clan_list' %}" class="back-to-shinobi-list">Clan List</a>
+{% endblock %}

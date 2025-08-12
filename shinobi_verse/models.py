@@ -4,8 +4,11 @@ from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.utils import timezone
 from django.db import models
+import os
+from django.core.validators import RegexValidator
 
 from shinobi_verse.manager import CustomUserManager
+from django.contrib.contenttypes.fields import GenericRelation
 
 # Create your models here.
 
@@ -33,6 +36,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
+    class Meta:
+        verbose_name = "User"
+        verbose_name_plural = "Users"
+
     def __str__(self):
         return self.email
 
@@ -44,10 +51,14 @@ class Shinobi(models.Model):
     village = models.CharField(max_length=100)
     rank = models.CharField(max_length=50, choices=RANK_CHOICES)
     chakra_nature = models.CharField(max_length=100, blank=True)
-    clan = models.ForeignKey("Clan", on_delete=models.SET_NULL, null=True)
+    clan = models.CharField(max_length=100, blank=True, null=True)
     bio = models.TextField()
     shinobi_picture = models.ImageField(upload_to='shinobi_pics/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    created_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='shinobis', null=True, blank=True)
+    comments = GenericRelation('Comment', related_query_name='shinobi')
+    likes = GenericRelation('Like', related_query_name='shinobi')
+    approved = models.BooleanField(default=False)
 
 
 class Clan(models.Model):
@@ -56,6 +67,9 @@ class Clan(models.Model):
     symbol = models.ImageField(upload_to="clan_symbols/", blank=True)
     founder = models.CharField(max_length=100, blank=True)
     description = models.TextField()
+    created_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE, null=True, blank=True)
+    comments = GenericRelation('Comment', related_query_name='shinobi')
+    likes = GenericRelation('Like', related_query_name='shinobi')
     approved = models.BooleanField(default=False)
 
 
@@ -65,6 +79,8 @@ class Jutsu(models.Model):
     jutsu_type = models.CharField(max_length=50)
     description = models.TextField()
     created_by = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    comments = GenericRelation('Comment', related_query_name='shinobi')
+    likes = GenericRelation('Like', related_query_name='shinobi')
     approved = models.BooleanField(default=False)
 
 
@@ -84,3 +100,35 @@ class Like(models.Model):
     content_object = GenericForeignKey()
     liked_at = models.DateTimeField(auto_now_add=True)
 
+class Profile(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    nickname = models.CharField(
+        max_length=50,
+        validators=[
+        RegexValidator(
+                regex=r'^[A-Za-z0-9]*$',
+                message='Nickname must be alphanumeric without spaces or special characters'
+        ), 
+        ], blank=True)
+    bio = models.TextField(max_length=500, blank=True, null=True)
+    avatar = models.ImageField(upload_to='avatars/', blank=True, null=True)     
+
+    def save(self, *args, **kwargs):
+        try:
+            this = Profile.objects.get(id=self.id)
+            if this.avatar != self.avatar:
+                if this.avatar:
+                    if os.path.isfile(this.avatar.path):
+                        os.remove(this.avatar.path)
+        except Profile.DoesNotExist:
+            pass
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        if self.avatar:
+            if os.path.isfile(self.avatar.path):
+                os.remove(self.avatar.path)
+        super().delete(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.user.nickname}'s profile"

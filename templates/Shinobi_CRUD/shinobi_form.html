@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'css/shinobies/shinobi_form.css'%}">
+{% endblock %}
+
+{% block content %}
+  <h2>{% if object %}Update{% else %}Create{% endif %} Shinobi</h2>
+
+  <form method="POST" enctype="multipart/form-data" class="shinobi-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit" class="create-btn-form">{% if object %}Update{% else %}Create{% endif %}</button>
+  </form>
+
+  <a href="{% url 'shinobi_list' %}" class="back-to-shinobi-list">Shinobi List</a>
+{% endblock %}

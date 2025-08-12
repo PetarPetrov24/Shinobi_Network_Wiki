@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'css/shinobies/shinobi_detail.css'%}">
+{% endblock %}
+
+{% include 'includes/add_comment.html' with object=object comment_form=comment_form %}
+
+{% block content %}
+  <p>{{ greeting_message }}</p>
+
+  <h2>{{ object.name }}</h2>
+
+  {% if object.shinobi_picture %}
+    <div class="shinobi-detail-avatar-img">
+      <img src="{{ object.shinobi_picture.url }}" alt="{{ object.name }}" style="max-width: 200px; border-radius: 0.5em;">
+    </div>
+  {% endif %}
+
+  <div class="shinobi-detail-info">
+    <p><strong>Age:</strong> {{ object.age }}</p>
+    <p><strong>Village:</strong> {{ object.village }}</p>
+    <p><strong>Rank:</strong> {{ object.rank }}</p>
+    <p><strong>Chakra Nature:</strong> {{ object.chakra_nature }}</p>
+    <p><strong>Clan:</strong> {{ object.clan }}</p>
+    <p><strong>Bio:</strong></p>
+    <p>{{ object.bio }}</p>
+    
+    <p>Creator: {{ object.created_by.profile.nickname }}</p>
+  </div>
+
+  <!-- other shinobi details here -->
+
+<div id="comments">
+  <h3>Comments</h3>
+
+  {% for comment in object.comments.all %}
+    <p><strong>{{ comment.user.username }}:</strong> {{ comment.text }}</p>
+  {% empty %}
+    <p>No comments yet.</p>
+  {% endfor %}
+
+  {% if user.is_authenticated %}
+    <form method="POST" action="{% url 'comment' 'shinobi' object.pk %}">
+      {% csrf_token %}
+      {{ comment_form.text }}
+      <button type="submit">Add Comment</button>
+    </form>
+  {% else %}
+    <p><a href="{% url 'login' %}">Log in</a> to add a comment.</p>
+  {% endif %}
+</div>
+
+  <a href="{% url 'shinobi_list' %}" class="shinobi-list-btn">Shinobi List</a>
+  
+{% endblock %}

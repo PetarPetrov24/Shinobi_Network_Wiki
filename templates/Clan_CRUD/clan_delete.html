@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'css/clans/clan_delete.css'%}">
+{% endblock %}
+
+{% block content %} 
+    <h2>Delete Clan: {{ object.name }}</h2>
+  
+
+  <form method="POST">
+    {% csrf_token %}
+    <div class="both-btns">
+      <p>Are you sure you want to delete <strong>{{ object.name }}</strong>?</p>
+      <button type="submit" class="btn-clan btn-delete-clan">Yes, delete</button>
+      <a href="{% url 'clan_list' %}" class="btn-clan btn-cancel-clan">Cancel</a>
+    </div>
+    
+  </form>
+{% endblock %}

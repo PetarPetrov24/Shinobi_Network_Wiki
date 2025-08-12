@@ -1,0 +1,43 @@
+.shinobi-form {
+  max-width: 300px;     
+  margin: 0 auto;       
+  text-align: center;   
+}
+
+.shinobi-form p {
+  margin-bottom: 1em;
+}
+
+
+.shinobi-form input,
+.shinobi-form select,
+.shinobi-form textarea {
+  width: 100%;           
+  padding: 0.5em;
+  box-sizing: border-box;
+  margin-top: 0.3em;
+}
+
+.create-btn-form {
+    color: white;
+    background-color: #23252b;
+}
+
+.create-btn-form:hover, .back-to-shinobi-list:hover {
+    color: #e05302;
+}
+
+.back-to-shinobi-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    background-color: #23252b;
+    text-decoration: none;
+    border-radius: 0.5em;
+    margin: 1em auto;
+    padding: 0.1em;
+    width: 100px;
+}
+

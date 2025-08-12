@@ -1,0 +1,112 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="main-welcome-message">
+        <h2>Welcome to Shinobi World!</h2>
+    </div>
+    
+    {% if not user.is_authenticated %}
+        <div class="welcome-anonymous">
+            <p>Welcome, Anonymous!</p>
+        </div>
+        <div class="anonymous-permissions">
+            <p>You can explore clans, shinobi and jutsu without logging in.</p>
+        </div>
+        
+        <section class="featured-section-featured-shinobi">
+            <h3>Featured Shinobies</h3>
+            <ul>
+                {% for shinobi in shinobies %}
+                    <li>{{ shinobi.name }}</li>
+                    {% empty %}
+                        <li>No shinobies available right now.</li>
+                    {% endfor %}
+            </ul>
+            <p class="info-text">
+                For full details about each shinobi, please visit the <strong>Shinobi</strong> page from the navigation menu.
+            </p>
+            
+        </section>
+
+        <section class="featured-section-featured-clans">
+            <h3>Featured Clans</h3>
+            <ul>
+                {% for clan in clans %}
+                    <li>{{ clan.name }}</li>
+                    {% empty %}
+                    <li>No clans available right now.</li>
+                {% endfor %}
+            </ul>
+            <p class="info-text">For full details about each clan, please visit the <strong>Clan</strong> page from the navigation menu.</p>
+        </section>
+
+        <section class="featured-section-featured-jutsu">
+            <h3>Featured Jutsu</h3>
+            <ul>
+                {% for jutsu in jutsus %}
+                    <li>{{ jutsu.name }}</li>
+                {% empty %}
+                    <li>No jutsu available right now.</li>
+                {% endfor %}
+            </ul>
+            <p class="info-text">For full details about each jutsu, please visit the <strong>Jutsu</strong> page from the navigation menu.</p>
+            
+        </section>
+
+        <div class="login-register-prompt">
+            <p><em>To like, comment and join the community, please <a href="{% url 'register'%}">Register</a> !</em></p>
+        </div>
+
+    {% else %}
+        <div class="user-welcome">
+            {% if user.is_superuser %}
+                <div class="welcome-admin">
+                    {% if user.profile and user.profile.nickname %}
+                        <p>Superuser since: {{ user.date_joined|date:"Y-m-d" }}</p>
+                        <p>Welcome, {{ user.profile.nickname }} 👑</p>
+                    {% else %}
+                        <p>Welcome, Admin User!</p>
+                    {% endif %}
+                </div>
+                
+                <div class="helpful-text-admin">
+                    <p>You have full access: you can <strong>view, like, comment, and approve</strong> all shinobi, clans, and jutsu.</p>
+                    <p><a href="/admin/" class="admin-panel-link">Admin Panel to manage approvals</a></p>
+                </div>
+
+            {% elif user.is_staff %}
+                <div class="welcome-staff">
+                    {% if user.profile and user.profile.nickname %}
+                        <p>Staff since: {{ user.date_joined|date:"Y-m-d" }}</p>
+                        <p>Welcome, {{ user.profile.nickname }} 🔧</p>
+                    {% else %}
+                        <p>Welcome, Staff User!</p>
+                    {% endif %}    
+                </div>
+                
+                <div class="helful-text-staff">
+                    <p>You can <strong>view, like, and comment</strong> on Shinobi, Clans, and Jutsu. Approval rights may be limited depending on your permissions.</p>
+                </div>
+                
+            {% else %}
+                <div class="welcome-authenticated-user">
+                    {% if user.profile and user.profile.nickname %}
+                        <div class="authenticated-since">
+                            <p>Member since: {{ user.date_joined|date:"Y-m-d" }}</p>
+                            <p>Welcome, {{ user.profile.nickname }}!</p>
+                        </div>
+                    {% else %}
+                        <p>Welcome, User!</p>
+                    {% endif %}
+                </div>
+                
+                
+                <div class="helpful-text-authenticated_user">
+                    <p>As a valued member, you can <strong>create, update, delete, view, like, and comment</strong> on Shinobi, Clans, and Jutsu entries.</p>
+                    <p>Feel free to contribute and manage your entries through the navigation menu.</p>
+                </div>
+                
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}

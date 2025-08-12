@@ -1,0 +1,21 @@
+.clan-detail-avatar-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.clan-list-btn {
+    display: block;         
+    margin: 1em auto;        
+    background-color: #23252b;
+    color: white;
+    padding: 0.5em 1em;
+    border-radius: 0.5em;
+    text-decoration: none;
+    width: 200px;
+    text-align: center;      
+}
+
+.clan-list-btn:hover {
+      color: #e05302;
+}
