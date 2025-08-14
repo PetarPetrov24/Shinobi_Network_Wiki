@@ -46,7 +46,7 @@
     <form method="POST" action="{% url 'comment' 'shinobi' object.pk %}">
       {% csrf_token %}
       {{ comment_form.text }}
-      <button type="submit">Add Comment</button>
+      <button type="submit" class="detail-add-btn">Add Comment</button>
     </form>
   {% else %}
     <p><a href="{% url 'login' %}">Log in</a> to add a comment.</p>

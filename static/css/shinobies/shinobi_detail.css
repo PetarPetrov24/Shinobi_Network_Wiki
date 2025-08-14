@@ -19,3 +19,25 @@
 .shinobi-list-btn:hover {
       color: #e05302;
 }
+
+form textarea {
+    display: flex;
+    justify-self: center;
+    border-radius: 1em;
+    margin: 2em;
+}
+
+.detail-add-btn {
+    display: flex;
+    justify-self: center;
+    background-color: #23252b;
+    color: white;
+}
+
+.detail-add-btn:hover {
+    color:#e05302;
+}
+
+button[type="submit"] {
+    margin: 2em;
+}
