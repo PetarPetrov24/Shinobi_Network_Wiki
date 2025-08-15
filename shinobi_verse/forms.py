@@ -1,5 +1,5 @@
 from django import forms
-from django.contrib.auth import get_user_model
+from django.contrib.auth import authenticate, get_user_model
 from shinobi_verse.models import Shinobi, Clan, Jutsu, Comment, Profile
 import re
 
@@ -38,6 +38,19 @@ class RegisterForm(forms.ModelForm):
     class Meta:
         model = UserModel
         fields = ['email']
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        placeholders = {
+            'email': 'Email',
+            'password1': 'Password',
+            'password2': 'Confirm Password'
+        }
+
+        for field_name, placeholder in placeholders.items():
+            if field_name in self.fields:
+                self.fields[field_name].widget.attrs['placeholder'] = placeholder
+                self.fields[field_name].label = ""
 
     def clean_password2(self):
         password1 = self.cleaned_data.get('password1')
@@ -57,6 +70,33 @@ class RegisterForm(forms.ModelForm):
 class LoginForm(forms.Form):
     email = forms.EmailField(max_length=50)
     password = forms.CharField(widget=forms.PasswordInput)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        placeholders = {
+            'email': 'Email',
+            'password': 'Password',
+        }
+
+        for field_name, placeholder in placeholders.items():
+            if field_name in self.fields:
+                self.fields[field_name].widget.attrs['placeholder'] = placeholder
+                self.fields[field_name].label = ""
+    
+    def clean(self):
+        cleaned_data = super().clean()
+        email = cleaned_data.get('email')
+        password = cleaned_data.get('password')
+
+        if email and password:
+            if not UserModel.objects.filter(email=email).exists():
+                raise forms.ValidationError("No account found with that email.")
+
+            user = authenticate(email=email, password=password)
+            if user is None:
+                raise forms.ValidationError("Incorrect password.")
+
+        return cleaned_data
 
 
 class SearchForm(forms.Form):

@@ -7,10 +7,29 @@
             <form action="{% url 'register' %}" method="POST">
                 {% csrf_token %}
                 <h2>Register</h2>
-                <input type="email" name="email" placeholder="Email" required>
-                <input type="password" name="password1" placeholder="Password" required>
-                <input type="password" name="password2" placeholder="Confirm Password" required>
-                <button type="submit">Register</button>  
+                    <!-- Non-field errors -->
+                {% if form.non_field_errors %}
+                    <div class="form-errors">
+                        {% for error in form.non_field_errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <!-- Loop through each field -->
+                {% for field in form %}
+                    <div>
+                        {{ field }}
+                        {% if field.errors %}
+                            <ul class="field-errors">
+                                {% for error in field.errors %}
+                                    <li>{{ error }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+                <button type="submit">Register</button>
             </form>
         </div>
     </div>
